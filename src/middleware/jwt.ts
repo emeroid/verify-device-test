@@ -1,21 +1,27 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
-function authentication (req: any, resp: any, next: any) {
-    // check if the header contains token
-
-    if(!req.header['Authorizaton']) {
+function authentication(req: any, resp: any, next: any) {
+    // Check if the header contains a token
+    if (!req.headers['authorization']) {
         return resp.status(401).json({
             status: false,
-            message: "Un Authorized",
+            message: "Unauthorized",
         });
     }
 
-    const token = req.header['Authorizaton'].split(" ")[1];
-    const decodedUser = jwt.verify(token, "MY_ACCESS_TOKEN");
-    req.user = decodedUser;
+    const token = req.headers['authorization'].split(" ")[1];
 
-    next();
+    try {
+        // Verify the token
+        const decodedUser = jwt.verify(token, "MY_ACCESS_TOKEN");
+        req.user = decodedUser;
+        next();
+    } catch (error) {
+        return resp.status(401).json({
+            status: false,
+            message: "Unauthorized",
+        });
+    }
 }
-
 
 module.exports = authentication;

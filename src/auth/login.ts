@@ -6,8 +6,6 @@ const  Validators = require('node-input-validator');
 async function login(req: any, resp: any) {
 
     // first validate user input before proceeding
-    // check if user already exists
-    
     const validate = new Validators.Validator(req.body, {
         email: 'required|email',
         password: 'required|string',

@@ -2,14 +2,12 @@ const User = require("../schema/userSchema");
 
 async function dashboard(req: any, resp: any) {
 
-    // first validate user input before proceeding
-    // check if user already exists
-    
-    const userExists = await User.findOne({email: req?.body?.email});
+    // Display user profile details from the request header
+    const userExists = await User.findOne({_id: req?.user?._id});
 
     if(!userExists) {
-        return resp.status(400).json({
-            message: "User Was not found!"
+        return resp.status(401).json({
+            message: "Unauthorized!"
         });
     }
 
