@@ -5,8 +5,8 @@
   "main": "./dist/index.js",
   "scripts": {
     "typ": "tsc --watch",
-		"watch": "node --watch ./dist/index.js",
-		"build": "tsc",
+    "watch": "node --watch ./dist/index.js",
+    "build": "tsc",
     "start": "ts-node src/index.ts",
     "dev": "npm-run-all -p typ watch"
   },
@@ -16,8 +16,12 @@
   "dependencies": {
     "@abtnode/mongoose-nedb": "^1.0.32",
     "@abtnode/nedb": "^1.0.32",
+    "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
-    "mongoose": "^4.13.21"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^4.13.21",
+    "node-input-validator": "^4.5.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
